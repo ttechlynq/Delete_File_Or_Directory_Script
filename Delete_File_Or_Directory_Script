@@ -1,0 +1,53 @@
+#!/bin/sh
+##################################################
+# Since anything deleted from the Unix/Linux os  #
+# is gone forever, this program helps you ensure #
+# that you either really need to delete a file or #
+# directory in order to avoid unintended deletion #
+##################################################
+
+      echo -n "Type a command (rm or rmdir): "
+      read command_typed
+if    [ $command_typed = "rm" -o $command_typed = "rmdir" ]; then
+      echo "WARNING! You are trying to DELETE a file!"
+      echo -n "Do you really want to take this action ? (yes or no) "
+      read option_typed
+
+if    [ $command_typed != "rm" ] && [ $command_typed != "rmdir" ]; then 
+      echo  "Invalid command typed."
+      echo "Nothing to do. Ending the process"
+fi
+
+if    [ $option_typed = "yes" ]; then
+      echo "Type the file name to DELETE"
+      read to_delete
+else
+      echo "You need to type "yes" to continue"
+exit 
+fi
+
+if    [ -f $to_delete ]; then
+      echo " The file exists and is being deleted"
+      $command_typed $to_delete 
+      echo "Your file has been deleted"
+else 
+
+if    [ -f != $to_delete ]; then 
+      echo "The file does not exist. No action taken"
+fi
+
+if   [ -d $to_delete ]; then
+     echo " The directory exists and is being deleted"
+     $command_typed $to_delete
+     echo "Your directory has been deleted"
+
+elif [ -d != $to_delete ]; then 
+     echo "The directory does not exist."
+     echo "Exiting without any action"
+exit 
+fi
+
+fi
+fi
+
+exit 0
